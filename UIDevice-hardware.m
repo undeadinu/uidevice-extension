@@ -18,7 +18,7 @@
  iPod2,1   -> iPod touch 2G 
 */
 
-- (NSString *) platform
++ (NSString *) platform
 {
 	size_t size;
     sysctlbyname("hw.machine", NULL, &size, NULL, 0);
@@ -29,11 +29,13 @@
 	return platform;
 }
 
-- (int) platformType
++ (int) platformType
 {
 	NSString *platform = [self platform];
 	if ([platform isEqualToString:@"iPhone1,1"]) return UIDevice1GiPhone;
 	if ([platform isEqualToString:@"iPhone1,2"]) return UIDevice3GiPhone;
+	if ([platform isEqualToString:@"iPhone2,1"]) return UIDevice3GSiPhone;
+	if ([platform isEqualToString:@"iPhone3,1"]) return UIDevice4GiPhone;
 	if ([platform isEqualToString:@"iPod1,1"])   return UIDevice1GiPod;
 	if ([platform isEqualToString:@"iPod2,1"])   return UIDevice2GiPod;
 	if ([platform hasPrefix:@"iPhone"]) return UIDeviceUnknowniPhone;
@@ -41,12 +43,14 @@
 	return UIDeviceUnknown;
 }
 
-- (NSString *) platformString
++ (NSString *) platformString
 {
 	switch ([self platformType])
 	{
 		case UIDevice1GiPhone: return IPHONE_1G_NAMESTRING;
 		case UIDevice3GiPhone: return IPHONE_3G_NAMESTRING;
+		case UIDevice3GSiPhone: return IPHONE_3GS_NAMESTRING;
+		case UIDevice4GiPhone: return IPHONE_4G_NAMESTRING;
 		case UIDeviceUnknowniPhone: return IPHONE_UNKNOWN_NAMESTRING;
 		
 		case UIDevice1GiPod: return IPOD_1G_NAMESTRING;
@@ -57,13 +61,20 @@
 	}
 }
 
-- (int) platformCapabilities
++ (int) platformCapabilities
 {
+	int capabilities = 0;
 	switch ([self platformType])
 	{
-		case UIDevice1GiPhone: return UIDeviceBuiltInSpeaker | UIDeviceBuiltInCamera | UIDeviceBuiltInMicrophone | UIDeviceSupportsExternalMicrophone | UIDeviceSupportsTelephony | UIDeviceSupportsVibration;
-		case UIDevice3GiPhone: return UIDeviceSupportsGPS | UIDeviceBuiltInSpeaker | UIDeviceBuiltInCamera | UIDeviceBuiltInMicrophone | UIDeviceSupportsExternalMicrophone | UIDeviceSupportsTelephony | UIDeviceSupportsVibration;
-		case UIDeviceUnknowniPhone: return UIDeviceBuiltInSpeaker | UIDeviceBuiltInCamera | UIDeviceBuiltInMicrophone | UIDeviceSupportsExternalMicrophone | UIDeviceSupportsTelephony | UIDeviceSupportsVibration;
+		case UIDevice4GiPhone: capabilities |= UIDeviceBuiltInGyroscope | UIDeviceBuiltInFrontCamera;
+		case UIDevice3GSiPhone: capabilities |= UIDeviceBuiltInCompass;
+		case UIDevice3GiPhone: capabilities |= UIDeviceSupportsGPS;
+		case UIDeviceUnknowniPhone:
+		case UIDevice1GiPhone: 
+		{
+			capabilities |= UIDeviceBuiltInSpeaker | UIDeviceBuiltInCamera | UIDeviceBuiltInMicrophone | UIDeviceSupportsExternalMicrophone | UIDeviceSupportsTelephony | UIDeviceSupportsVibration;		
+			return capabilities;
+		}
 
 		case UIDevice1GiPod: return 0;
 		case UIDevice2GiPod: return UIDeviceBuiltInSpeaker | UIDeviceBuiltInMicrophone | UIDeviceSupportsExternalMicrophone;
