@@ -16,6 +16,11 @@
  iPhone1,2 -> iPhone 3G 
  iPod1,1   -> iPod touch 1G 
  iPod2,1   -> iPod touch 2G 
+
+ For more information:
+             http://www.edepot.com/iphone.html
+             http://stackoverflow.com/questions/1108859/detect-the-specific-iphone-ipod-touch-model
+
 */
 
 + (NSString *) platform
@@ -35,7 +40,10 @@
 	if ([platform isEqualToString:@"iPhone1,1"]) return UIDevice1GiPhone;
 	if ([platform isEqualToString:@"iPhone1,2"]) return UIDevice3GiPhone;
 	if ([platform isEqualToString:@"iPhone2,1"]) return UIDevice3GSiPhone;
-	if ([platform isEqualToString:@"iPhone3,1"]) return UIDevice4GiPhone;
+	if ([platform isEqualToString:@"iPhone3,1"]) return UIDevice4iPhone;
+	// iPhone 4 CDMA
+	if ([platform isEqualToString:@"iPhone3,3"]) return UIDevice4iPhone;
+	if ([platform isEqualToString:@"iPhone4,1"]) return UIDevice4SiPhone;
 	if ([platform isEqualToString:@"iPod1,1"])   return UIDevice1GiPod;
 	if ([platform isEqualToString:@"iPod2,1"])   return UIDevice2GiPod;
 	if ([platform hasPrefix:@"iPhone"]) return UIDeviceUnknowniPhone;
@@ -50,7 +58,8 @@
 		case UIDevice1GiPhone: return IPHONE_1G_NAMESTRING;
 		case UIDevice3GiPhone: return IPHONE_3G_NAMESTRING;
 		case UIDevice3GSiPhone: return IPHONE_3GS_NAMESTRING;
-		case UIDevice4GiPhone: return IPHONE_4G_NAMESTRING;
+		case UIDevice4iPhone: return IPHONE_4_NAMESTRING;
+        case UIDevice4SiPhone: return IPHONE_4S_NAMESTRING;
 		case UIDeviceUnknowniPhone: return IPHONE_UNKNOWN_NAMESTRING;
 		
 		case UIDevice1GiPod: return IPOD_1G_NAMESTRING;
@@ -66,7 +75,8 @@
 	int capabilities = 0;
 	switch ([self platformType])
 	{
-		case UIDevice4GiPhone: capabilities |= UIDeviceBuiltInGyroscope | UIDeviceBuiltInFrontCamera;
+        case UIDevice4SiPhone:
+		case UIDevice4iPhone: capabilities |= UIDeviceBuiltInGyroscope | UIDeviceBuiltInFrontCamera;
 		case UIDevice3GSiPhone: capabilities |= UIDeviceBuiltInCompass;
 		case UIDevice3GiPhone: capabilities |= UIDeviceSupportsGPS;
 		case UIDeviceUnknowniPhone:
