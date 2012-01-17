@@ -66,7 +66,8 @@
 		case UIDevice2GiPod: return IPOD_2G_NAMESTRING;
 		case UIDeviceUnknowniPod: return IPOD_UNKNOWN_NAMESTRING;
 
-		default: return nil;
+		default: 
+            return [NSString stringWithFormat:@"Unknown platform: %@", [self platform]];
 	}
 }
 
