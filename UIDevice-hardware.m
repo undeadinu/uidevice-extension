@@ -16,7 +16,7 @@
  iPhone1,2 -> iPhone 3G 
  iPod1,1   -> iPod touch 1G 
  iPod2,1   -> iPod touch 2G 
-
+ iPad2,2   -> iPad 2
  For more information:
              http://www.edepot.com/iphone.html
              http://stackoverflow.com/questions/1108859/detect-the-specific-iphone-ipod-touch-model
@@ -37,6 +37,7 @@
 + (int) platformType
 {
 	NSString *platform = [self platform];
+    //NSLog(@"Platform: %@", platform);
 	if ([platform isEqualToString:@"iPhone1,1"]) return UIDevice1GiPhone;
 	if ([platform isEqualToString:@"iPhone1,2"]) return UIDevice3GiPhone;
 	if ([platform isEqualToString:@"iPhone2,1"]) return UIDevice3GSiPhone;
@@ -44,10 +45,16 @@
 	// iPhone 4 CDMA
 	if ([platform isEqualToString:@"iPhone3,3"]) return UIDevice4iPhone;
 	if ([platform isEqualToString:@"iPhone4,1"]) return UIDevice4SiPhone;
+	if ([platform hasPrefix:@"iPhone"]) return UIDeviceUnknowniPhone;
+        
 	if ([platform isEqualToString:@"iPod1,1"])   return UIDevice1GiPod;
 	if ([platform isEqualToString:@"iPod2,1"])   return UIDevice2GiPod;
-	if ([platform hasPrefix:@"iPhone"]) return UIDeviceUnknowniPhone;
 	if ([platform hasPrefix:@"iPod"]) return UIDeviceUnknowniPod;
+
+    if ([platform hasSuffix:@"iPad"]) return UIDeviceUnknowniPad;
+    // $todo original iPad and iPad 3 support
+    if ([platform isEqualToString:@"iPad2,2"]) return UIDevice2GiPad;
+
 	return UIDeviceUnknown;
 }
 
@@ -66,6 +73,8 @@
 		case UIDevice2GiPod: return IPOD_2G_NAMESTRING;
 		case UIDeviceUnknowniPod: return IPOD_UNKNOWN_NAMESTRING;
 
+        case UIDevice2GiPad: return IPAD_2_NAMESTRING;
+        case UIDeviceUnknowniPad: return IPAD_UNKNOWN_NAMESTRING;
 		default: return nil;
 	}
 }
