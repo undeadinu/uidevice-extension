@@ -75,7 +75,8 @@
 
         case UIDevice2GiPad: return IPAD_2_NAMESTRING;
         case UIDeviceUnknowniPad: return IPAD_UNKNOWN_NAMESTRING;
-		default: return nil;
+		default: 
+            return [NSString stringWithFormat:@"Unknown platform: %@", [self platform]];
 	}
 }
 
