@@ -49,11 +49,21 @@
         
 	if ([platform isEqualToString:@"iPod1,1"])   return UIDevice1GiPod;
 	if ([platform isEqualToString:@"iPod2,1"])   return UIDevice2GiPod;
+    if ([platform isEqualToString:@"iPod3,1"])   return UIDevice3GiPod;
+    if ([platform isEqualToString:@"iPod4,1"])   return UIDevice4GiPod;
 	if ([platform hasPrefix:@"iPod"]) return UIDeviceUnknowniPod;
 
+    if ([platform isEqualToString:@"iPad1,1"])   return UIDevice1iPad;
+    if ([platform isEqualToString:@"iPad2,1"])   return UIDevice2iPadWiFi;
+    if ([platform isEqualToString:@"iPad2,2"])   return UIDevice2iPadGSM;
+    if ([platform isEqualToString:@"iPad2,3"])   return UIDevice2iPadCDMA;
+    if ([platform isEqualToString:@"iPad3,1"])   return UIDevice3GiPadWiFi;
+    if ([platform isEqualToString:@"iPad3,2"])   return UIDevice3GiPad;
+    if ([platform isEqualToString:@"iPad3,3"])   return UIDevice3GiPad;
     if ([platform hasSuffix:@"iPad"]) return UIDeviceUnknowniPad;
-    // $todo original iPad and iPad 3 support
-    if ([platform isEqualToString:@"iPad2,2"]) return UIDevice2GiPad;
+    
+    if ([platform isEqualToString:@"i386"])      return UIDeviceSimulator;
+    if ([platform isEqualToString:@"x86_64"])    return UIDeviceSimulator;
 
 	return UIDeviceUnknown;
 }
@@ -68,13 +78,23 @@
 		case UIDevice4iPhone: return IPHONE_4_NAMESTRING;
         case UIDevice4SiPhone: return IPHONE_4S_NAMESTRING;
 		case UIDeviceUnknowniPhone: return IPHONE_UNKNOWN_NAMESTRING;
-		
+            
 		case UIDevice1GiPod: return IPOD_1G_NAMESTRING;
 		case UIDevice2GiPod: return IPOD_2G_NAMESTRING;
+		case UIDevice3GiPod: return IPOD_3G_NAMESTRING;
+        case UIDevice4GiPod: return IPOD_4G_NAMESTRING;
 		case UIDeviceUnknowniPod: return IPOD_UNKNOWN_NAMESTRING;
 
-        case UIDevice2GiPad: return IPAD_2_NAMESTRING;
+        case UIDevice1iPad: return IPAD_1_NAMESTRING;
+        case UIDevice2iPadCDMA: 
+        case UIDevice2iPadGSM:
+        case UIDevice2iPadWiFi: return IPAD_2_NAMESTRING;
+        case UIDevice3GiPad: 
+        case UIDevice3GiPadWiFi: return IPAD_3_NAMESTRING;
         case UIDeviceUnknowniPad: return IPAD_UNKNOWN_NAMESTRING;
+            
+        case UIDeviceSimulator: return SIMULATOR_NAMESTRING;
+            
 		default: 
             return [NSString stringWithFormat:@"Unknown platform: %@", [self platform]];
 	}

@@ -7,24 +7,37 @@
 #define IPHONE_4S_NAMESTRING @"iPhone 4S"
 #define IPHONE_UNKNOWN_NAMESTRING @"Unknown iPhone"
 
+#define IPAD_1_NAMESTRING @"iPad 1"
 #define IPAD_2_NAMESTRING @"iPad 2"
+#define IPAD_3_NAMESTRING @"iPad 3"
 #define IPAD_UNKNOWN_NAMESTRING @"Unknown iPad"
 
 #define IPOD_1G_NAMESTRING @"iPod touch 1G"
 #define IPOD_2G_NAMESTRING @"iPod touch 2G"
+#define IPOD_3G_NAMESTRING @"iPod touch 3G"
+#define IPOD_4G_NAMESTRING @"iPod touch 4G"
 #define IPOD_UNKNOWN_NAMESTRING @"Unknown iPod"
+
+#define SIMULATOR_NAMESTRING @"Simulator"
 
 typedef enum {
 	UIDeviceUnknown,
 	UIDevice1GiPhone,
-	UIDevice1GiPod,
 	UIDevice3GiPhone,
 	UIDevice3GSiPhone,
 	UIDevice4iPhone,
 	UIDevice4SiPhone,
+	UIDevice1GiPod,
 	UIDevice2GiPod,
-    UIDevice1GiPad,
-    UIDevice2GiPad,
+    UIDevice3GiPod,
+    UIDevice4GiPod,
+    UIDevice1iPad,
+    UIDevice2iPadWiFi,
+    UIDevice2iPadGSM,
+    UIDevice2iPadCDMA,
+    UIDevice3GiPadWiFi,
+    UIDevice3GiPad,
+    UIDeviceSimulator,
 	UIDeviceUnknowniPhone,
 	UIDeviceUnknowniPod,
     UIDeviceUnknowniPad,
