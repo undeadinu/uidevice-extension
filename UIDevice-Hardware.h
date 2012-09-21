@@ -25,10 +25,13 @@
 #define IPAD_1_NAMESTRING              @"iPad 1"
 #define IPAD_2_NAMESTRING              @"iPad 2"
 #define THE_NEW_IPAD_NAMESTRING         @"The new iPad"
+#define IPAD_4G_NAMESTRING              @"iPad 4G"
 #define IPAD_UNKNOWN_NAMESTRING         @"Unknown iPad"
 
-#define APPLE_TV_2_NAMESTRING           @"Apple TV 2"
-#define APPLE_TV_UNKNOWN_NAMESTRING      @"Unknown Apple TV"
+#define APPLETV_2G_NAMESTRING           @"Apple TV 2"
+#define APPLETV_3G_NAMESTRING           @"Apple TV 3"
+#define APPLETV_4G_NAMESTRING           @"Apple TV 4"
+#define APPLETV_UNKNOWN_NAMESTRING      @"Unknown Apple TV"
 
 #define IOS_FAMILY_UNKNOWN_DEVICE       @"Unknown iOS device"
 
@@ -59,6 +62,7 @@ typedef enum {
     UIDeviceiPad1,
     UIDeviceiPad2,
     UIDeviceTheNewiPad,
+    UIDeviceiPad4G,
     
     UIDeviceAppleTV2,
     UIDeviceAppleTV3,

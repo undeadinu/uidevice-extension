@@ -217,7 +217,7 @@
         case UIDeviceiPad1 : return IPAD_1_NAMESTRING;
         case UIDeviceiPad2 : return IPAD_2_NAMESTRING;
         case UIDeviceTheNewiPad : return THE_NEW_IPAD_NAMESTRING;
-        case UIDevice4GiPad : return IPAD_4G_NAMESTRING;
+        case UIDeviceiPad4G : return IPAD_4G_NAMESTRING;
         case UIDeviceUnknowniPad : return IPAD_UNKNOWN_NAMESTRING;
             
         case UIDeviceAppleTV2 : return APPLETV_2G_NAMESTRING;
