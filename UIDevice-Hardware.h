@@ -8,26 +8,26 @@
 
 #define IFPGA_NAMESTRING                @"iFPGA"
 
-#define IPHONE_1G_NAMESTRING            @"iPhone 1G"
+#define IPHONE_1_NAMESTRING            @"iPhone 1"
 #define IPHONE_3G_NAMESTRING            @"iPhone 3G"
 #define IPHONE_3GS_NAMESTRING           @"iPhone 3GS" 
 #define IPHONE_4_NAMESTRING             @"iPhone 4" 
 #define IPHONE_4S_NAMESTRING            @"iPhone 4S"
 #define IPHONE_UNKNOWN_NAMESTRING       @"Unknown iPhone"
 
-#define IPOD_1G_NAMESTRING              @"iPod touch 1G"
-#define IPOD_2G_NAMESTRING              @"iPod touch 2G"
-#define IPOD_3G_NAMESTRING              @"iPod touch 3G"
-#define IPOD_4G_NAMESTRING              @"iPod touch 4G"
+#define IPOD_1_NAMESTRING              @"iPod touch 1"
+#define IPOD_2_NAMESTRING              @"iPod touch 2"
+#define IPOD_3_NAMESTRING              @"iPod touch 3"
+#define IPOD_4_NAMESTRING              @"iPod touch 4"
 #define IPOD_UNKNOWN_NAMESTRING         @"Unknown iPod"
 
-#define IPAD_1G_NAMESTRING              @"iPad 1G"
-#define IPAD_2G_NAMESTRING              @"iPad 2G"
-#define IPAD_3G_NAMESTRING              @"iPad 3G"
+#define IPAD_1_NAMESTRING              @"iPad 1"
+#define IPAD_2_NAMESTRING              @"iPad 2"
+#define THE_NEW_IPAD_NAMESTRING         @"The new iPad"
 #define IPAD_UNKNOWN_NAMESTRING         @"Unknown iPad"
 
-#define APPLETV_2G_NAMESTRING           @"Apple TV 2G"
-#define APPLETV_UNKNOWN_NAMESTRING      @"Unknown Apple TV"
+#define APPLE_TV_2_NAMESTRING           @"Apple TV 2"
+#define APPLE_TV_UNKNOWN_NAMESTRING      @"Unknown Apple TV"
 
 #define IOS_FAMILY_UNKNOWN_DEVICE       @"Unknown iOS device"
 
@@ -42,20 +42,20 @@ typedef enum {
     UIDeviceiPhoneSimulatoriPhone, // both regular and iPhone 4 devices
     UIDeviceiPhoneSimulatoriPad,
     
-    UIDevice1GiPhone,
-    UIDevice3GiPhone,
-    UIDevice3GSiPhone,
-    UIDevice4iPhone,
-    UIDevice4SiPhone,
+    UIDeviceiPhone1,
+    UIDeviceiPhone3G,
+    UIDeviceiPhone3GS,
+    UIDeviceiPhone4,
+    UIDeviceiPhone4S,
     
-    UIDevice1GiPod,
-    UIDevice2GiPod,
-    UIDevice3GiPod,
-    UIDevice4GiPod,
+    UIDeviceiPod1,
+    UIDeviceiPod2,
+    UIDeviceiPod3,
+    UIDeviceiPod4,
     
-    UIDevice1GiPad,
-    UIDevice2GiPad,
-    UIDevice3GiPad,
+    UIDeviceiPad1,
+    UIDeviceiPad2,
+    UIDeviceTheNewiPad,
     
     UIDeviceAppleTV2,
     UIDeviceUnknownAppleTV,
