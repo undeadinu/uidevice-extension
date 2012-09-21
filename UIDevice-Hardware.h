@@ -1,6 +1,6 @@
 /*
  Erica Sadun, http://ericasadun.com
- iPhone Developer's Cookbook, 5.0 Edition
+ iPhone Developer's Cookbook, 6.x Edition
  BSD License, Use at your own risk
  */
 
@@ -13,6 +13,7 @@
 #define IPHONE_3GS_NAMESTRING           @"iPhone 3GS" 
 #define IPHONE_4_NAMESTRING             @"iPhone 4" 
 #define IPHONE_4S_NAMESTRING            @"iPhone 4S"
+#define IPHONE_5_NAMESTRING             @"iPhone 5"
 #define IPHONE_UNKNOWN_NAMESTRING       @"Unknown iPhone"
 
 #define IPOD_1_NAMESTRING              @"iPod touch 1"
@@ -41,12 +42,14 @@ typedef enum {
     UIDeviceiPhoneSimulator,
     UIDeviceiPhoneSimulatoriPhone, // both regular and iPhone 4 devices
     UIDeviceiPhoneSimulatoriPad,
+    UIDeviceSimulatorAppleTV,
     
     UIDeviceiPhone1,
     UIDeviceiPhone3G,
     UIDeviceiPhone3GS,
     UIDeviceiPhone4,
     UIDeviceiPhone4S,
+    UIDeviceiPhone5,
     
     UIDeviceiPod1,
     UIDeviceiPod2,
@@ -58,14 +61,25 @@ typedef enum {
     UIDeviceTheNewiPad,
     
     UIDeviceAppleTV2,
-    UIDeviceUnknownAppleTV,
+    UIDeviceAppleTV3,
+    UIDeviceAppleTV4,
     
     UIDeviceUnknowniPhone,
     UIDeviceUnknowniPod,
     UIDeviceUnknowniPad,
+    UIDeviceUnknownAppleTV,
     UIDeviceIFPGA,
 
 } UIDevicePlatform;
+
+typedef enum {
+    UIDeviceFamilyiPhone,
+    UIDeviceFamilyiPod,
+    UIDeviceFamilyiPad,
+    UIDeviceFamilyAppleTV,
+    UIDeviceFamilyUnknown,
+    
+} UIDeviceFamily;
 
 @interface UIDevice (Hardware)
 - (NSString *) platform;
@@ -75,6 +89,7 @@ typedef enum {
 
 - (NSUInteger) cpuFrequency;
 - (NSUInteger) busFrequency;
+- (NSUInteger) cpuCount;
 - (NSUInteger) totalMemory;
 - (NSUInteger) userMemory;
 
@@ -82,4 +97,7 @@ typedef enum {
 - (NSNumber *) freeDiskSpace;
 
 - (NSString *) macaddress;
+
+- (BOOL) hasRetinaDisplay;
+- (UIDeviceFamily) deviceFamily;
 @end

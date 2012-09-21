@@ -1,6 +1,6 @@
 /*
  Erica Sadun, http://ericasadun.com
- iPhone Developer's Cookbook, 5.0 Edition
+ iPhone Developer's Cookbook, 6.x Edition
  BSD License, Use at your own risk
  */
 
@@ -22,11 +22,15 @@
  iPhone1,1 ->    iPhone 1, M68
  iPhone1,2 ->    iPhone 3G, N82
  iPhone2,1 ->    iPhone 3GS, N88
- iPhone3,1 ->    iPhone 4/AT&T, GSM, N90
- iPhone3,2 ->    iPhone 4, CDMA, Prototype
- iPhone3,3 ->    iPhone 4/Verizon, CDMA, N92
- iPhone4,1 ->    iPhone 4S/AT&T, N94
- iPhone4,2 ->    (iPhone 4S/Verizon), TBD
+ iPhone3,1 ->    iPhone 4/AT&T, N89
+ iPhone3,2 ->    iPhone 4/Other Carrier?, ??
+ iPhone3,3 ->    iPhone 4/Verizon, TBD
+ iPhone4,1 ->    (iPhone 4S/GSM), TBD
+ iPhone4,2 ->    (iPhone 4S/CDMA), TBD
+ iPhone4,3 ->    (iPhone 4S/???)
+ iPhone5,1 ->    iPhone Next Gen, TBD
+ iPhone5,1 ->    iPhone Next Gen, TBD
+ iPhone5,1 ->    iPhone Next Gen, TBD
 
  iPod1,1   ->    iPod touch 1, N45
  iPod2,1   ->    iPod touch 2, N72
@@ -44,9 +48,13 @@
  iPad3,1   ->    The new iPad, WiFi
  iPad3,2   ->    The new iPad, CDMA
  iPad3,3   ->    The new iPad
+ iPad4,1   ->    (iPad 4G, WiFi)
+ iPad4,2   ->    (iPad 4G, GSM)
+ iPad4,3   ->    (iPad 4G, CDMA)
 
  iProd2,1   ->   AppleTV 2, Prototype
  AppleTV2,1 ->   AppleTV 2, K66
+ AppleTV3,1 ->   AppleTV 3, ??
 
  i386, x86_64 -> iPhone Simulator
 */
@@ -99,6 +107,11 @@
     return [self getSysInfo:HW_BUS_FREQ];
 }
 
+- (NSUInteger) cpuCount
+{
+    return [self getSysInfo:HW_NCPU];
+}
+
 - (NSUInteger) totalMemory
 {
     return [self getSysInfo:HW_PHYSMEM];
@@ -115,6 +128,15 @@
 }
 
 #pragma mark file system -- Thanks Joachim Bean!
+
+/*
+ extern NSString *NSFileSystemSize;
+ extern NSString *NSFileSystemFreeSize;
+ extern NSString *NSFileSystemNodes;
+ extern NSString *NSFileSystemFreeNodes;
+ extern NSString *NSFileSystemNumber;
+*/
+
 - (NSNumber *) totalDiskSpace
 {
     NSDictionary *fattributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
@@ -141,6 +163,7 @@
     if ([platform hasPrefix:@"iPhone2"])            return UIDeviceiPhone3GS;
     if ([platform hasPrefix:@"iPhone3"])            return UIDeviceiPhone4;
     if ([platform hasPrefix:@"iPhone4"])            return UIDeviceiPhone4S;
+    if ([platform hasPrefix:@"iPhone5"])            return UIDeviceiPhone5;
     
     // iPod
     if ([platform hasPrefix:@"iPod1"])             return UIDeviceiPod1;
@@ -156,12 +179,14 @@
     
     // Apple TV
     if ([platform hasPrefix:@"AppleTV2"])           return UIDeviceAppleTV2;
+    if ([platform hasPrefix:@"AppleTV3"])           return UIDeviceAppleTV3;
 
     if ([platform hasPrefix:@"iPhone"])             return UIDeviceUnknowniPhone;
     if ([platform hasPrefix:@"iPod"])               return UIDeviceUnknowniPod;
     if ([platform hasPrefix:@"iPad"])               return UIDeviceUnknowniPad;
+    if ([platform hasPrefix:@"AppleTV"])            return UIDeviceUnknownAppleTV;
     
-     // Simulator thanks Jordan Breeding
+    // Simulator thanks Jordan Breeding
     if ([platform hasSuffix:@"86"] || [platform isEqual:@"x86_64"])
     {
         BOOL smallerScreen = [[UIScreen mainScreen] bounds].size.width < 768;
@@ -180,6 +205,7 @@
         case UIDeviceiPhone3GS: return IPHONE_3GS_NAMESTRING;
         case UIDeviceiPhone4: return IPHONE_4_NAMESTRING;
         case UIDeviceiPhone4S: return IPHONE_4S_NAMESTRING;
+        case UIDeviceiPhone5: return IPHONE_5_NAMESTRING;
         case UIDeviceUnknowniPhone: return IPHONE_UNKNOWN_NAMESTRING;
         
         case UIDeviceiPod1: return IPOD_1_NAMESTRING;
@@ -191,10 +217,13 @@
         case UIDeviceiPad1 : return IPAD_1_NAMESTRING;
         case UIDeviceiPad2 : return IPAD_2_NAMESTRING;
         case UIDeviceTheNewiPad : return THE_NEW_IPAD_NAMESTRING;
+        case UIDevice4GiPad : return IPAD_4G_NAMESTRING;
         case UIDeviceUnknowniPad : return IPAD_UNKNOWN_NAMESTRING;
             
-        case UIDeviceAppleTV2 : return APPLE_TV_2_NAMESTRING;
-        case UIDeviceUnknownAppleTV: return APPLE_TV_UNKNOWN_NAMESTRING;
+        case UIDeviceAppleTV2 : return APPLETV_2G_NAMESTRING;
+        case UIDeviceAppleTV3 : return APPLETV_3G_NAMESTRING;
+        case UIDeviceAppleTV4 : return APPLETV_4G_NAMESTRING;
+        case UIDeviceUnknownAppleTV: return APPLETV_UNKNOWN_NAMESTRING;
             
         case UIDeviceiPhoneSimulator: return IPHONE_SIMULATOR_NAMESTRING;
         case UIDeviceiPhoneSimulatoriPhone: return IPHONE_SIMULATOR_IPHONE_NAMESTRING;
@@ -204,6 +233,22 @@
             
         default: return IOS_FAMILY_UNKNOWN_DEVICE;
     }
+}
+
+- (BOOL) hasRetinaDisplay
+{
+    return ([UIScreen mainScreen].scale == 2.0f);
+}
+
+- (UIDeviceFamily) deviceFamily
+{
+    NSString *platform = [self platform];
+    if ([platform hasPrefix:@"iPhone"]) return UIDeviceFamilyiPhone;
+    if ([platform hasPrefix:@"iPod"]) return UIDeviceFamilyiPod;
+    if ([platform hasPrefix:@"iPad"]) return UIDeviceFamilyiPad;
+    if ([platform hasPrefix:@"AppleTV"]) return UIDeviceFamilyAppleTV;
+    
+    return UIDeviceFamilyUnknown;
 }
 
 #pragma mark MAC addy
@@ -236,13 +281,13 @@
     }
     
     if ((buf = malloc(len)) == NULL) {
-        printf("Could not allocate memory. error!\n");
+        printf("Error: Memory allocation error\n");
         return NULL;
     }
     
     if (sysctl(mib, 6, buf, &len, NULL, 0) < 0) {
-        printf("Error: sysctl, take 2");
-        free(buf);
+        printf("Error: sysctl, take 2\n");
+        free(buf); // Thanks, Remy "Psy" Demerest
         return NULL;
     }
     
@@ -254,7 +299,6 @@
     // NSString *outstring = [NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X", 
     //                       *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
     free(buf);
-
     return outstring;
 }
 
