@@ -19,7 +19,7 @@
  
  iFPGA ->        ??
 
- iPhone1,1 ->    iPhone 1G, M68
+ iPhone1,1 ->    iPhone 1, M68
  iPhone1,2 ->    iPhone 3G, N82
  iPhone2,1 ->    iPhone 3GS, N88
  iPhone3,1 ->    iPhone 4/AT&T, N89
@@ -32,24 +32,27 @@
  iPhone5,1 ->    iPhone Next Gen, TBD
  iPhone5,1 ->    iPhone Next Gen, TBD
 
- iPod1,1   ->    iPod touch 1G, N45
- iPod2,1   ->    iPod touch 2G, N72
- iPod2,2   ->    Unknown, ??
- iPod3,1   ->    iPod touch 3G, N18
- iPod4,1   ->    iPod touch 4G, N80
+ iPod1,1   ->    iPod touch 1, N45
+ iPod2,1   ->    iPod touch 2, N72
+ iPod2,2   ->    iPod touch 3, Prototype
+ iPod3,1   ->    iPod touch 3, N18
+ iPod4,1   ->    iPod touch 4, N81
  
  // Thanks NSForge
- iPad1,1   ->    iPad 1G, WiFi and 3G, K48
- iPad2,1   ->    iPad 2G, WiFi, K93
- iPad2,2   ->    iPad 2G, GSM 3G, K94
- iPad2,3   ->    iPad 2G, CDMA 3G, K95
- iPad3,1   ->    (iPad 3G, WiFi)
- iPad3,2   ->    (iPad 3G, GSM)
- iPad3,3   ->    (iPad 3G, CDMA)
+ ipad0,1   ->    iPad, Prototype
+ iPad1,1   ->    iPad 1, WiFi and 3G, K48
+ iPad2,1   ->    iPad 2, WiFi, K93
+ iPad2,2   ->    iPad 2, GSM 3G, K94
+ iPad2,3   ->    iPad 2, CDMA 3G, K95
+ iPad2,4   ->    iPad 2, WiFi R2, K93A
+ iPad3,1   ->    The new iPad, WiFi
+ iPad3,2   ->    The new iPad, CDMA
+ iPad3,3   ->    The new iPad
  iPad4,1   ->    (iPad 4G, WiFi)
  iPad4,2   ->    (iPad 4G, GSM)
  iPad4,3   ->    (iPad 4G, CDMA)
 
+ iProd2,1   ->   AppleTV 2, Prototype
  AppleTV2,1 ->   AppleTV 2, K66
  AppleTV3,1 ->   AppleTV 3, ??
 
@@ -66,7 +69,7 @@
     char *answer = malloc(size);
     sysctlbyname(typeSpecifier, answer, &size, NULL, 0);
     
-    NSString *results = [NSString stringWithCString:answer encoding: NSUTF8StringEncoding];
+    NSString *results = @(answer);
 
     free(answer);
     return results;
@@ -137,13 +140,13 @@
 - (NSNumber *) totalDiskSpace
 {
     NSDictionary *fattributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
-    return [fattributes objectForKey:NSFileSystemSize];
+    return fattributes[NSFileSystemSize];
 }
 
 - (NSNumber *) freeDiskSpace
 {
     NSDictionary *fattributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
-    return [fattributes objectForKey:NSFileSystemFreeSize];
+    return fattributes[NSFileSystemFreeSize];
 }
 
 #pragma mark platform type and name utils
@@ -155,24 +158,24 @@
     if ([platform isEqualToString:@"iFPGA"])        return UIDeviceIFPGA;
 
     // iPhone
-    if ([platform isEqualToString:@"iPhone1,1"])    return UIDevice1GiPhone;
-    if ([platform isEqualToString:@"iPhone1,2"])    return UIDevice3GiPhone;
-    if ([platform hasPrefix:@"iPhone2"])            return UIDevice3GSiPhone;
-    if ([platform hasPrefix:@"iPhone3"])            return UIDevice4iPhone;
-    if ([platform hasPrefix:@"iPhone4"])            return UIDevice4SiPhone;
-    if ([platform hasPrefix:@"iPhone5"])            return UIDevice5iPhone;
+    if ([platform isEqualToString:@"iPhone1,1"])    return UIDeviceiPhone1;
+    if ([platform isEqualToString:@"iPhone1,2"])    return UIDeviceiPhone3G;
+    if ([platform hasPrefix:@"iPhone2"])            return UIDeviceiPhone3GS;
+    if ([platform hasPrefix:@"iPhone3"])            return UIDeviceiPhone4;
+    if ([platform hasPrefix:@"iPhone4"])            return UIDeviceiPhone4S;
+    if ([platform hasPrefix:@"iPhone5"])            return UIDeviceiPhone5;
     
     // iPod
-    if ([platform hasPrefix:@"iPod1"])              return UIDevice1GiPod;
-    if ([platform hasPrefix:@"iPod2"])              return UIDevice2GiPod;
-    if ([platform hasPrefix:@"iPod3"])              return UIDevice3GiPod;
-    if ([platform hasPrefix:@"iPod4"])              return UIDevice4GiPod;
+    if ([platform hasPrefix:@"iPod1"])             return UIDeviceiPod1;
+    if ([platform isEqualToString:@"iPod2,2"])      return UIDeviceiPod3;
+    if ([platform hasPrefix:@"iPod2"])              return UIDeviceiPod2;
+    if ([platform hasPrefix:@"iPod3"])              return UIDeviceiPod3;
+    if ([platform hasPrefix:@"iPod4"])              return UIDeviceiPod4;
 
     // iPad
-    if ([platform hasPrefix:@"iPad1"])              return UIDevice1GiPad;
-    if ([platform hasPrefix:@"iPad2"])              return UIDevice2GiPad;
-    if ([platform hasPrefix:@"iPad3"])              return UIDevice3GiPad;
-    if ([platform hasPrefix:@"iPad4"])              return UIDevice4GiPad;
+    if ([platform hasPrefix:@"iPad1"])              return UIDeviceiPad1;
+    if ([platform hasPrefix:@"iPad2"])              return UIDeviceiPad2;
+    if ([platform hasPrefix:@"iPad3"])              return UIDeviceTheNewiPad;
     
     // Apple TV
     if ([platform hasPrefix:@"AppleTV2"])           return UIDeviceAppleTV2;
@@ -187,7 +190,7 @@
     if ([platform hasSuffix:@"86"] || [platform isEqual:@"x86_64"])
     {
         BOOL smallerScreen = [[UIScreen mainScreen] bounds].size.width < 768;
-        return smallerScreen ? UIDeviceSimulatoriPhone : UIDeviceSimulatoriPad;
+        return smallerScreen ? UIDeviceiPhoneSimulatoriPhone : UIDeviceiPhoneSimulatoriPad;
     }
 
     return UIDeviceUnknown;
@@ -197,23 +200,23 @@
 {
     switch ([self platformType])
     {
-        case UIDevice1GiPhone: return IPHONE_1G_NAMESTRING;
-        case UIDevice3GiPhone: return IPHONE_3G_NAMESTRING;
-        case UIDevice3GSiPhone: return IPHONE_3GS_NAMESTRING;
-        case UIDevice4iPhone: return IPHONE_4_NAMESTRING;
-        case UIDevice4SiPhone: return IPHONE_4S_NAMESTRING;
-        case UIDevice5iPhone: return IPHONE_5_NAMESTRING;
+        case UIDeviceiPhone1: return IPHONE_1_NAMESTRING;
+        case UIDeviceiPhone3G: return IPHONE_3G_NAMESTRING;
+        case UIDeviceiPhone3GS: return IPHONE_3GS_NAMESTRING;
+        case UIDeviceiPhone4: return IPHONE_4_NAMESTRING;
+        case UIDeviceiPhone4S: return IPHONE_4S_NAMESTRING;
+        case UIDeviceiPhone5: return IPHONE_5_NAMESTRING;
         case UIDeviceUnknowniPhone: return IPHONE_UNKNOWN_NAMESTRING;
         
-        case UIDevice1GiPod: return IPOD_1G_NAMESTRING;
-        case UIDevice2GiPod: return IPOD_2G_NAMESTRING;
-        case UIDevice3GiPod: return IPOD_3G_NAMESTRING;
-        case UIDevice4GiPod: return IPOD_4G_NAMESTRING;
+        case UIDeviceiPod1: return IPOD_1_NAMESTRING;
+        case UIDeviceiPod2: return IPOD_2_NAMESTRING;
+        case UIDeviceiPod3: return IPOD_3_NAMESTRING;
+        case UIDeviceiPod4: return IPOD_4_NAMESTRING;
         case UIDeviceUnknowniPod: return IPOD_UNKNOWN_NAMESTRING;
             
-        case UIDevice1GiPad : return IPAD_1G_NAMESTRING;
-        case UIDevice2GiPad : return IPAD_2G_NAMESTRING;
-        case UIDevice3GiPad : return IPAD_3G_NAMESTRING;
+        case UIDeviceiPad1 : return IPAD_1_NAMESTRING;
+        case UIDeviceiPad2 : return IPAD_2_NAMESTRING;
+        case UIDeviceTheNewiPad : return THE_NEW_IPAD_NAMESTRING;
         case UIDevice4GiPad : return IPAD_4G_NAMESTRING;
         case UIDeviceUnknowniPad : return IPAD_UNKNOWN_NAMESTRING;
             
@@ -222,10 +225,9 @@
         case UIDeviceAppleTV4 : return APPLETV_4G_NAMESTRING;
         case UIDeviceUnknownAppleTV: return APPLETV_UNKNOWN_NAMESTRING;
             
-        case UIDeviceSimulator: return SIMULATOR_NAMESTRING;
-        case UIDeviceSimulatoriPhone: return SIMULATOR_IPHONE_NAMESTRING;
-        case UIDeviceSimulatoriPad: return SIMULATOR_IPAD_NAMESTRING;
-        case UIDeviceSimulatorAppleTV: return SIMULATOR_APPLETV_NAMESTRING;
+        case UIDeviceiPhoneSimulator: return IPHONE_SIMULATOR_NAMESTRING;
+        case UIDeviceiPhoneSimulatoriPhone: return IPHONE_SIMULATOR_IPHONE_NAMESTRING;
+        case UIDeviceiPhoneSimulatoriPad: return IPHONE_SIMULATOR_IPAD_NAMESTRING;
             
         case UIDeviceIFPGA: return IFPGA_NAMESTRING;
             
@@ -292,8 +294,10 @@
     ifm = (struct if_msghdr *)buf;
     sdl = (struct sockaddr_dl *)(ifm + 1);
     ptr = (unsigned char *)LLADDR(sdl);
-    NSString *outstring = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
-
+    NSString *outstring = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X", 
+                           *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
+    // NSString *outstring = [NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X", 
+    //                       *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
     free(buf);
     return outstring;
 }
