@@ -61,7 +61,7 @@
     char *answer = malloc(size);
     sysctlbyname(typeSpecifier, answer, &size, NULL, 0);
     
-    NSString *results = [NSString stringWithCString:answer encoding: NSUTF8StringEncoding];
+    NSString *results = @(answer);
 
     free(answer);
     return results;
@@ -118,13 +118,13 @@
 - (NSNumber *) totalDiskSpace
 {
     NSDictionary *fattributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
-    return [fattributes objectForKey:NSFileSystemSize];
+    return fattributes[NSFileSystemSize];
 }
 
 - (NSNumber *) freeDiskSpace
 {
     NSDictionary *fattributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
-    return [fattributes objectForKey:NSFileSystemFreeSize];
+    return fattributes[NSFileSystemFreeSize];
 }
 
 #pragma mark platform type and name utils
