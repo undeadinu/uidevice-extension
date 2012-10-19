@@ -41,6 +41,9 @@
 - (NSString *) imei;
 - (NSString *) serialnumber;
 - (NSString *) backlightlevel;
+- (NSString *) modelnumber;
+- (NSString *) RegionInfo;
+//- (NSString *) CopyDeviceColor;
 @end
 #endif
 

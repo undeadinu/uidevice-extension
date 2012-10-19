@@ -32,6 +32,13 @@ typedef io_object_t	io_registry_entry_t;
 typedef char		io_name_t[128];
 typedef UInt32		IOOptionBits;
 
+/*
+extern id lockdown_connect();
+extern id lockdown_copy_value(id, id, id);
+extern void lockdown_disconnect();
+extern NSString *kLockdownDeviceColorKey;
+*/
+
 CFTypeRef
 IORegistryEntrySearchCFProperty(
 								io_registry_entry_t	entry,
@@ -75,7 +82,7 @@ NSArray *getValue(NSString *iosearch)
     io_registry_entry_t entry = IORegistryGetRootEntry(masterPort);
     if (entry == MACH_PORT_NULL) return nil;
 	
-    CFTypeRef prop = IORegistryEntrySearchCFProperty(entry, kIODeviceTreePlane, (CFStringRef) iosearch, nil, kIORegistryIterateRecursively);
+    CFTypeRef prop = IORegistryEntrySearchCFProperty(entry, kIODeviceTreePlane, (__bridge CFStringRef) iosearch, nil, kIORegistryIterateRecursively);
     if (!prop) return nil;
 	
 	propID = CFGetTypeID(prop);
@@ -91,7 +98,7 @@ NSArray *getValue(NSString *iosearch)
     bufSize = CFDataGetLength(propData);
     if (!bufSize) return nil;
 	
-    NSString *p1 = [[[NSString alloc] initWithBytes:CFDataGetBytePtr(propData) length:bufSize encoding:1] autorelease];
+    NSString *p1 = [[NSString alloc] initWithBytes:CFDataGetBytePtr(propData) length:bufSize encoding:1];
     mach_port_deallocate(mach_task_self(), masterPort);
     return [p1 componentsSeparatedByString:@"\0"];
 }
@@ -116,5 +123,34 @@ NSArray *getValue(NSString *iosearch)
 	if (results) return [results objectAtIndex:0];
 	return nil;
 }
+
+- (NSString *) modelnumber{
+    NSArray *results = getValue(@"model-number");
+    if (results){
+        NSString *mn=[[results objectAtIndex:0] copy];
+        return  mn;
+    }
+    return nil;
+}
+
+- (NSString *) RegionInfo{
+    NSArray *results = getValue(@"region-info");
+    if (results){
+        NSString *mn=[[results objectAtIndex:0] copy];
+        return  mn;
+    }
+    return nil;
+}
+
+/*
+- (NSString *) CopyDeviceColor {
+    id connection = lockdown_connect();
+    NSString *color = lockdown_copy_value(connection, nil, kLockdownDeviceColorKey);
+    //NSLog(@"color = %@", color);
+    lockdown_disconnect(connection);
+    return color;
+}
+*/
+
 @end
 #endif
