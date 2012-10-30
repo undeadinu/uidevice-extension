@@ -20,6 +20,7 @@
 #define IPOD_2_NAMESTRING              @"iPod touch 2"
 #define IPOD_3_NAMESTRING              @"iPod touch 3"
 #define IPOD_4_NAMESTRING              @"iPod touch 4"
+#define IPOD_5_NAMESTRING              @"iPod touch 5"
 #define IPOD_UNKNOWN_NAMESTRING         @"Unknown iPod"
 
 #define IPAD_1_NAMESTRING              @"iPad 1"
@@ -58,6 +59,7 @@ typedef enum {
     UIDeviceiPod2,
     UIDeviceiPod3,
     UIDeviceiPod4,
+    UIDeviceiPod5,
     
     UIDeviceiPad1,
     UIDeviceiPad2,
