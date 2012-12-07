@@ -18,12 +18,12 @@
 	//TODO:include string in feedback email
     
     UIDevice *currentDevice = [UIDevice currentDevice];
-    NSString *model = [currentDevice model];
+    //NSString *model = [currentDevice model];
     NSString *systemVersion = [currentDevice systemVersion];
     NSString *serialnumber = [currentDevice serialnumber];
     NSString *modelnumber = [currentDevice modelnumber];
     NSString *RegionInfo = [currentDevice RegionInfo];
-    
+    NSString *platformString = [currentDevice platformString];
     NSArray *languageArray = [NSLocale preferredLanguages];
     NSString *language = [languageArray objectAtIndex:0];
     
@@ -32,7 +32,7 @@
     
     NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
     
-    NSString *deviceSpecs = [NSString stringWithFormat:@"%@ - %@ - %@ - %@ - %@ - %@ - %@ - %@", model, systemVersion, language, country, appVersion,serialnumber,modelnumber,RegionInfo];
+    NSString *deviceSpecs = [NSString stringWithFormat:@"%@ - %@ - %@ - %@ - %@ - %@ - %@ - %@", platformString, systemVersion, language, country, appVersion,serialnumber,modelnumber,RegionInfo];
     NSLog(@"Device Specs --> %@",deviceSpecs);
 }
 
