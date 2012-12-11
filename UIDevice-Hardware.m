@@ -179,6 +179,18 @@
     return fattributes[NSFileSystemFreeSize];
 }
 
++( NSInteger )getSubmodel:( NSString* )platform
+{
+    NSInteger submodel = -1;
+    
+    NSArray* components = [ platform componentsSeparatedByString:@"," ];
+    if ( [ components count ] >= 2 )
+    {
+        submodel = [ [ components objectAtIndex:1 ] intValue ];
+    }
+    return submodel;
+}
+
 #pragma mark platform type and name utils
 - (NSUInteger) platformType
 {
@@ -205,9 +217,30 @@
 
     // iPad
     if ([platform hasPrefix:@"iPad1"])              return UIDeviceiPad1;
-    if ([platform isEqualToString:@"iPad2,5"])      return UIDeviceiPadMini;
-    if ([platform hasPrefix:@"iPad2"])              return UIDeviceiPad2;
-    if ([platform hasPrefix:@"iPad3"])              return UIDeviceTheNewiPad;
+    if ([platform hasPrefix:@"iPad2"])
+    {
+        NSInteger submodel = [ UIDevice getSubmodel:platform ];
+        if ( submodel <= 4 )
+        {
+            return UIDeviceiPad2;
+        } else
+        {
+            return UIDeviceiPadMini;
+        }
+    }
+    if ([platform hasPrefix:@"iPad3"])
+    {
+        NSInteger submodel = [ UIDevice getSubmodel:platform ];
+        if ( submodel <= 3 )
+        {
+            return UIDeviceTheNewiPad;
+        } else
+        {
+            return UIDeviceiPad4G;
+        }
+    }
+    
+    if ([platform hasPrefix:@"iPad4"])              return UIDeviceiPad4G;
     
     // Apple TV
     if ([platform hasPrefix:@"AppleTV2"])           return UIDeviceAppleTV2;
@@ -262,6 +295,7 @@
         case UIDeviceiPhoneSimulator: return IPHONE_SIMULATOR_NAMESTRING;
         case UIDeviceiPhoneSimulatoriPhone: return IPHONE_SIMULATOR_IPHONE_NAMESTRING;
         case UIDeviceiPhoneSimulatoriPad: return IPHONE_SIMULATOR_IPAD_NAMESTRING;
+        case UIDeviceSimulatorAppleTV: return SIMULATOR_APPLETV_NAMESTRING;
             
         case UIDeviceIFPGA: return IFPGA_NAMESTRING;
             
@@ -269,9 +303,24 @@
     }
 }
 
-- (BOOL) hasRetinaDisplay
++ (BOOL) hasRetinaDisplay
 {
     return ([UIScreen mainScreen].scale == 2.0f);
+}
+
++ (NSString *) imageSuffixRetinaDisplay
+{
+    return @"@2x";
+}
+
++ (BOOL) has4InchDisplay
+{
+    return ([UIScreen mainScreen].bounds.size.height == 568);
+}
+
++ (NSString *) imageSuffix4InchDisplay
+{
+    return @"-568h";
 }
 
 - (UIDeviceFamily) deviceFamily

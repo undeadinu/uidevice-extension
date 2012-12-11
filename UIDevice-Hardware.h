@@ -40,6 +40,7 @@
 #define IPHONE_SIMULATOR_NAMESTRING         @"iPhone Simulator"
 #define IPHONE_SIMULATOR_IPHONE_NAMESTRING  @"iPhone Simulator"
 #define IPHONE_SIMULATOR_IPAD_NAMESTRING    @"iPad Simulator"
+#define SIMULATOR_APPLETV_NAMESTRING    @"Apple TV Simulator"
 
 typedef enum {
     UIDeviceUnknown,
@@ -106,6 +107,10 @@ typedef enum {
 
 - (NSString *) macaddress;
 
-- (BOOL) hasRetinaDisplay;
++ (BOOL) hasRetinaDisplay;
++ (NSString *) imageSuffixRetinaDisplay;
++ (BOOL) has4InchDisplay;
++ (NSString *) imageSuffix4InchDisplay;
+
 - (UIDeviceFamily) deviceFamily;
 @end
