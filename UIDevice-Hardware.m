@@ -194,11 +194,20 @@
 #pragma mark platform type and name utils
 - (NSUInteger) platformType
 {
-    NSString *platform = [self platform];
+    return [UIDevice platformTypeForString:[self platform]];
+}
 
+
+- (NSString *) platformString
+{
+    return [UIDevice platformStringForType:[self platformType]];
+}
+
++ (NSUInteger) platformTypeForString:(NSString *)platform
+{
     // The ever mysterious iFPGA
     if ([platform isEqualToString:@"iFPGA"])        return UIDeviceIFPGA;
-
+	
     // iPhone
     if ([platform isEqualToString:@"iPhone1,1"])    return UIDeviceiPhone1;
     if ([platform isEqualToString:@"iPhone1,2"])    return UIDeviceiPhone3G;
@@ -214,7 +223,7 @@
     if ([platform hasPrefix:@"iPod3"])              return UIDeviceiPod3;
     if ([platform hasPrefix:@"iPod4"])              return UIDeviceiPod4;
     if ([platform hasPrefix:@"iPod5"])              return UIDeviceiPod5;
-
+	
     // iPad
     if ([platform hasPrefix:@"iPad1"])              return UIDeviceiPad1;
     if ([platform hasPrefix:@"iPad2"])
@@ -245,7 +254,7 @@
     // Apple TV
     if ([platform hasPrefix:@"AppleTV2"])           return UIDeviceAppleTV2;
     if ([platform hasPrefix:@"AppleTV3"])           return UIDeviceAppleTV3;
-
+	
     if ([platform hasPrefix:@"iPhone"])             return UIDeviceUnknowniPhone;
     if ([platform hasPrefix:@"iPod"])               return UIDeviceUnknowniPod;
     if ([platform hasPrefix:@"iPad"])               return UIDeviceUnknowniPad;
@@ -257,13 +266,13 @@
         BOOL smallerScreen = [[UIScreen mainScreen] bounds].size.width < 768;
         return smallerScreen ? UIDeviceiPhoneSimulatoriPhone : UIDeviceiPhoneSimulatoriPad;
     }
-
+	
     return UIDeviceUnknown;
 }
 
-- (NSString *) platformString
++ (NSString *) platformStringForType:(NSUInteger)platformType
 {
-    switch ([self platformType])
+	switch (platformType)
     {
         case UIDeviceiPhone1: return IPHONE_1_NAMESTRING;
         case UIDeviceiPhone3G: return IPHONE_3G_NAMESTRING;
@@ -272,7 +281,7 @@
         case UIDeviceiPhone4S: return IPHONE_4S_NAMESTRING;
         case UIDeviceiPhone5: return IPHONE_5_NAMESTRING;
         case UIDeviceUnknowniPhone: return IPHONE_UNKNOWN_NAMESTRING;
-        
+			
         case UIDeviceiPod1: return IPOD_1_NAMESTRING;
         case UIDeviceiPod2: return IPOD_2_NAMESTRING;
         case UIDeviceiPod3: return IPOD_3_NAMESTRING;
@@ -301,6 +310,12 @@
             
         default: return IOS_FAMILY_UNKNOWN_DEVICE;
     }
+}
+
++ (NSString *) platformStringForPlatform:(NSString *)platform
+{
+	NSUInteger platformType = [UIDevice platformTypeForString:platform];
+	return [UIDevice platformStringForType:platformType];
 }
 
 + (BOOL) hasRetinaDisplay
