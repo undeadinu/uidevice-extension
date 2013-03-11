@@ -107,6 +107,10 @@ typedef enum {
 
 - (NSString *) macaddress;
 
++ (NSUInteger) platformTypeForString:(NSString *)platform;
++ (NSString *) platformStringForType:(NSUInteger)platformType;
++ (NSString *) platformStringForPlatform:(NSString *)platform;
+
 + (BOOL) hasRetinaDisplay;
 + (NSString *) imageSuffixRetinaDisplay;
 + (BOOL) has4InchDisplay;
