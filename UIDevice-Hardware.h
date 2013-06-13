@@ -54,8 +54,13 @@ typedef enum {
     UIDeviceiPhone3G,
     UIDeviceiPhone3GS,
     UIDeviceiPhone4,
+    UIDeviceiPhone4GSM,
+    UIDeviceiPhone4GSMRevA,
+    UIDeviceiPhone4CDMA,
     UIDeviceiPhone4S,
     UIDeviceiPhone5,
+    UIDeviceiPhone5GSM,
+    UIDeviceiPhone5CDMA,
     
     UIDeviceiPod1,
     UIDeviceiPod2,

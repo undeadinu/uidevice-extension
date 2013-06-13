@@ -212,12 +212,16 @@
     if ([platform isEqualToString:@"iPhone1,1"])    return UIDeviceiPhone1;
     if ([platform isEqualToString:@"iPhone1,2"])    return UIDeviceiPhone3G;
     if ([platform hasPrefix:@"iPhone2"])            return UIDeviceiPhone3GS;
-    if ([platform hasPrefix:@"iPhone3"])            return UIDeviceiPhone4;
+    if ([platform isEqualToString:@"iPhone3,1"])          return UIDeviceiPhone4GSM;
+    if ([platform isEqualToString:@"iPhone3,2"])          return UIDeviceiPhone4GSMRevA;
+    if ([platform isEqualToString:@"iPhone3,3"])          return UIDeviceiPhone4CDMA;
     if ([platform hasPrefix:@"iPhone4"])            return UIDeviceiPhone4S;
-    if ([platform hasPrefix:@"iPhone5"])            return UIDeviceiPhone5;
+    if ([platform isEqualToString:@"iPhone5,1"])          return UIDeviceiPhone5GSM;
+    if ([platform isEqualToString:@"iPhone5,2"])          return UIDeviceiPhone5CDMA;
+    
     
     // iPod
-    if ([platform hasPrefix:@"iPod1"])             return UIDeviceiPod1;
+    if ([platform hasPrefix:@"iPod1"])              return UIDeviceiPod1;
     if ([platform isEqualToString:@"iPod2,2"])      return UIDeviceiPod3;
     if ([platform hasPrefix:@"iPod2"])              return UIDeviceiPod2;
     if ([platform hasPrefix:@"iPod3"])              return UIDeviceiPod3;
@@ -274,41 +278,44 @@
 {
 	switch (platformType)
     {
-        case UIDeviceiPhone1: return IPHONE_1_NAMESTRING;
-        case UIDeviceiPhone3G: return IPHONE_3G_NAMESTRING;
-        case UIDeviceiPhone3GS: return IPHONE_3GS_NAMESTRING;
-        case UIDeviceiPhone4: return IPHONE_4_NAMESTRING;
-        case UIDeviceiPhone4S: return IPHONE_4S_NAMESTRING;
-        case UIDeviceiPhone5: return IPHONE_5_NAMESTRING;
-        case UIDeviceUnknowniPhone: return IPHONE_UNKNOWN_NAMESTRING;
+        case UIDeviceiPhone1:               return IPHONE_1_NAMESTRING;
+        case UIDeviceiPhone3G:              return IPHONE_3G_NAMESTRING;
+        case UIDeviceiPhone3GS:             return IPHONE_3GS_NAMESTRING;
+        case UIDeviceiPhone4GSM:            return IPHONE_4_NAMESTRING;
+        case UIDeviceiPhone4GSMRevA:        return IPHONE_4_NAMESTRING;
+        case UIDeviceiPhone4CDMA:           return IPHONE_4_NAMESTRING;
+        case UIDeviceiPhone4S:              return IPHONE_4S_NAMESTRING;
+        case UIDeviceiPhone5GSM:            return IPHONE_5_NAMESTRING;
+        case UIDeviceiPhone5CDMA:           return IPHONE_5_NAMESTRING;
+        case UIDeviceUnknowniPhone:         return IPHONE_UNKNOWN_NAMESTRING;
 			
-        case UIDeviceiPod1: return IPOD_1_NAMESTRING;
-        case UIDeviceiPod2: return IPOD_2_NAMESTRING;
-        case UIDeviceiPod3: return IPOD_3_NAMESTRING;
-        case UIDeviceiPod4: return IPOD_4_NAMESTRING;
-        case UIDeviceiPod5: return IPOD_5_NAMESTRING;
-        case UIDeviceUnknowniPod: return IPOD_UNKNOWN_NAMESTRING;
+        case UIDeviceiPod1:                 return IPOD_1_NAMESTRING;
+        case UIDeviceiPod2:                 return IPOD_2_NAMESTRING;
+        case UIDeviceiPod3:                 return IPOD_3_NAMESTRING;
+        case UIDeviceiPod4:                 return IPOD_4_NAMESTRING;
+        case UIDeviceiPod5:                 return IPOD_5_NAMESTRING;
+        case UIDeviceUnknowniPod:           return IPOD_UNKNOWN_NAMESTRING;
             
-        case UIDeviceiPad1 : return IPAD_1_NAMESTRING;
-        case UIDeviceiPad2 : return IPAD_2_NAMESTRING;
-        case UIDeviceTheNewiPad : return THE_NEW_IPAD_NAMESTRING;
-        case UIDeviceiPad4G : return IPAD_4G_NAMESTRING;
-        case UIDeviceiPadMini : return IPAD_MINI_NAMESTRING;
-        case UIDeviceUnknowniPad : return IPAD_UNKNOWN_NAMESTRING;
+        case UIDeviceiPad1 :                return IPAD_1_NAMESTRING;
+        case UIDeviceiPad2 :                return IPAD_2_NAMESTRING;
+        case UIDeviceTheNewiPad :           return THE_NEW_IPAD_NAMESTRING;
+        case UIDeviceiPad4G :               return IPAD_4G_NAMESTRING;
+        case UIDeviceiPadMini :             return IPAD_MINI_NAMESTRING;
+        case UIDeviceUnknowniPad :          return IPAD_UNKNOWN_NAMESTRING;
             
-        case UIDeviceAppleTV2 : return APPLETV_2G_NAMESTRING;
-        case UIDeviceAppleTV3 : return APPLETV_3G_NAMESTRING;
-        case UIDeviceAppleTV4 : return APPLETV_4G_NAMESTRING;
-        case UIDeviceUnknownAppleTV: return APPLETV_UNKNOWN_NAMESTRING;
+        case UIDeviceAppleTV2 :             return APPLETV_2G_NAMESTRING;
+        case UIDeviceAppleTV3 :             return APPLETV_3G_NAMESTRING;
+        case UIDeviceAppleTV4 :             return APPLETV_4G_NAMESTRING;
+        case UIDeviceUnknownAppleTV:        return APPLETV_UNKNOWN_NAMESTRING;
             
-        case UIDeviceiPhoneSimulator: return IPHONE_SIMULATOR_NAMESTRING;
+        case UIDeviceiPhoneSimulator:       return IPHONE_SIMULATOR_NAMESTRING;
         case UIDeviceiPhoneSimulatoriPhone: return IPHONE_SIMULATOR_IPHONE_NAMESTRING;
-        case UIDeviceiPhoneSimulatoriPad: return IPHONE_SIMULATOR_IPAD_NAMESTRING;
-        case UIDeviceSimulatorAppleTV: return SIMULATOR_APPLETV_NAMESTRING;
+        case UIDeviceiPhoneSimulatoriPad:   return IPHONE_SIMULATOR_IPAD_NAMESTRING;
+        case UIDeviceSimulatorAppleTV:      return SIMULATOR_APPLETV_NAMESTRING;
             
-        case UIDeviceIFPGA: return IFPGA_NAMESTRING;
+        case UIDeviceIFPGA:                 return IFPGA_NAMESTRING;
             
-        default: return IOS_FAMILY_UNKNOWN_DEVICE;
+        default:                            return IOS_FAMILY_UNKNOWN_DEVICE;
     }
 }
 
