@@ -52,15 +52,16 @@
  iPhone1,1 ->    iPhone 1, M68
  iPhone1,2 ->    iPhone 3G, N82
  iPhone2,1 ->    iPhone 3GS, N88
- iPhone3,1 ->    iPhone 4/AT&T, N89
- iPhone3,2 ->    iPhone 4/Other Carrier?, ??
- iPhone3,3 ->    iPhone 4/Verizon, TBD
- iPhone4,1 ->    (iPhone 4S/GSM), TBD
- iPhone4,2 ->    (iPhone 4S/CDMA), TBD
- iPhone4,3 ->    (iPhone 4S/???)
- iPhone5,1 ->    iPhone Next Gen, TBD
- iPhone5,1 ->    iPhone Next Gen, TBD
- iPhone5,1 ->    iPhone Next Gen, TBD
+ iPhone3,1 ->    iPhone 4/GSM, N89
+ iPhone3,2 ->    iPhone 4/GSM Rev A, N90
+ iPhone3,3 ->    iPhone 4/CDMA, N92
+ iPhone4,1 ->    iPhone 4S/GSM+CDMA, N94
+ iPhone5,1 ->    iPhone 5/GSM, N41
+ iPhone5,2 ->    iPhone 5/GSM+CDMA, N42
+ iPhone5,3 ->    iPhone 5C/GSM, N48
+ iPhone5,4 ->    iPhone 5C/GSM+CDMA, N49
+ iPhone6,1 ->    iPhone 5S/GSM, N51
+ iPhone6,2 ->    iPhone 5S/GSM+CDMA, N53
 
  iPod1,1   ->    iPod touch 1, N45
  iPod2,1   ->    iPod touch 2, N72
@@ -212,13 +213,16 @@
     if ([platform isEqualToString:@"iPhone1,1"])    return UIDeviceiPhone1;
     if ([platform isEqualToString:@"iPhone1,2"])    return UIDeviceiPhone3G;
     if ([platform hasPrefix:@"iPhone2"])            return UIDeviceiPhone3GS;
-    if ([platform isEqualToString:@"iPhone3,1"])          return UIDeviceiPhone4GSM;
-    if ([platform isEqualToString:@"iPhone3,2"])          return UIDeviceiPhone4GSMRevA;
-    if ([platform isEqualToString:@"iPhone3,3"])          return UIDeviceiPhone4CDMA;
+    if ([platform isEqualToString:@"iPhone3,1"])    return UIDeviceiPhone4GSM;
+    if ([platform isEqualToString:@"iPhone3,2"])    return UIDeviceiPhone4GSMRevA;
+    if ([platform isEqualToString:@"iPhone3,3"])    return UIDeviceiPhone4CDMA;
     if ([platform hasPrefix:@"iPhone4"])            return UIDeviceiPhone4S;
-    if ([platform isEqualToString:@"iPhone5,1"])          return UIDeviceiPhone5GSM;
-    if ([platform isEqualToString:@"iPhone5,2"])          return UIDeviceiPhone5CDMA;
-    
+    if ([platform isEqualToString:@"iPhone5,1"])    return UIDeviceiPhone5GSM;
+    if ([platform isEqualToString:@"iPhone5,2"])    return UIDeviceiPhone5CDMA;
+    if ([platform isEqualToString:@"iPhone5,3"])    return UIDeviceiPhone5CGSM;
+    if ([platform isEqualToString:@"iPhone5,4"])    return UIDeviceiPhone5CGSMCDMA;
+    if ([platform isEqualToString:@"iPhone6,1"])    return UIDeviceiPhone5SGSM;
+    if ([platform isEqualToString:@"iPhone6,2"])    return UIDeviceiPhone5SGSMCDMA;
     
     // iPod
     if ([platform hasPrefix:@"iPod1"])              return UIDeviceiPod1;
@@ -287,6 +291,10 @@
         case UIDeviceiPhone4S:              return IPHONE_4S_NAMESTRING;
         case UIDeviceiPhone5GSM:            return IPHONE_5_NAMESTRING;
         case UIDeviceiPhone5CDMA:           return IPHONE_5_NAMESTRING;
+        case UIDeviceiPhone5CGSM:           return IPHONE_5C_NAMESTRING;
+        case UIDeviceiPhone5CGSMCDMA:       return IPHONE_5C_NAMESTRING;
+        case UIDeviceiPhone5SGSM:           return IPHONE_5S_NAMESTRING;
+        case UIDeviceiPhone5SGSMCDMA:       return IPHONE_5S_NAMESTRING;
         case UIDeviceUnknowniPhone:         return IPHONE_UNKNOWN_NAMESTRING;
 			
         case UIDeviceiPod1:                 return IPOD_1_NAMESTRING;
