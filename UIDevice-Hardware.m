@@ -257,7 +257,7 @@
         }
     }
     
-    if ([platform hasPrefix:@"iPad4"])              return UIDeviceiPad4G;
+    if ([platform hasPrefix:@"iPad4"])              return UIDeviceiPadAir;
     
     // Apple TV
     if ([platform hasPrefix:@"AppleTV2"])           return UIDeviceAppleTV2;
@@ -308,6 +308,7 @@
         case UIDeviceiPad2 :                return IPAD_2_NAMESTRING;
         case UIDeviceTheNewiPad :           return THE_NEW_IPAD_NAMESTRING;
         case UIDeviceiPad4G :               return IPAD_4G_NAMESTRING;
+        case UIDeviceiPadAir :               return IPAD_AIR_NAMESTRING;
         case UIDeviceiPadMini :             return IPAD_MINI_NAMESTRING;
         case UIDeviceUnknowniPad :          return IPAD_UNKNOWN_NAMESTRING;
             
