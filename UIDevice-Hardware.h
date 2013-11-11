@@ -29,7 +29,9 @@
 #define IPAD_2_NAMESTRING               @"iPad 2"
 #define THE_NEW_IPAD_NAMESTRING         @"The new iPad"
 #define IPAD_4G_NAMESTRING              @"iPad 4G"
-#define IPAD_AIR_NAMESTRING             @"iPad Air"
+#define IPAD_AIR_NAMESTRING             @"iPad Air (WiFi)"
+#define IPAD_AIR_LTE_NAMESTRING         @"iPad Air (LTE)"
+
 #define IPAD_MINI_NAMESTRING            @"iPad mini"
 #define IPAD_UNKNOWN_NAMESTRING         @"Unknown iPad"
 
@@ -80,6 +82,7 @@ typedef enum {
     UIDeviceTheNewiPad,
     UIDeviceiPad4G,
     UIDeviceiPadAir,
+    UIDeviceiPadAirLTE,
     UIDeviceiPadMini,
     
     UIDeviceAppleTV2,
