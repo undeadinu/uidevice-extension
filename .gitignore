@@ -10,3 +10,4 @@ target/*
 profile
 *.svn
 /.svn/*
+xcuserdata/

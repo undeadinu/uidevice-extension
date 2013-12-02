@@ -6,6 +6,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIDevice-Orientation.h"
+#import "UIDevice-Capabilities.h"
 
 #define COOKBOOK_PURPLE_COLOR [UIColor colorWithRed:0.20392f green:0.19607f blue:0.61176f alpha:1.0f]
 #define BARBUTTON(TITLE, SELECTOR) [[UIBarButtonItem alloc] initWithTitle:TITLE style:UIBarButtonItemStylePlain target:self action:SELECTOR]
@@ -32,6 +33,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(showOrientation:) userInfo:nil repeats:YES];
+    
+    [[UIDevice currentDevice] scanCapabilities];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
