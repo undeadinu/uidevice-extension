@@ -14,7 +14,7 @@
  
  */
 
-#define GRAPHICS_SERVICES_PATH	"/System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices"
+#define GRAPHICS_SERVICES_PATH	"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices"
 
 @implementation UIDevice (Capabilities)
 
@@ -23,7 +23,11 @@
 	void *libHandle = dlopen(GRAPHICS_SERVICES_PATH, RTLD_LAZY);
 	int (*GSSystemHasCapability)(NSString *);
 	GSSystemHasCapability = dlsym(libHandle, "GSSystemHasCapability");
-	BOOL result = ( BOOL )GSSystemHasCapability(capability);
+	BOOL result = NO;
+    if (GSSystemHasCapability)
+    {
+        result = ( BOOL )GSSystemHasCapability(capability);
+    }
 	dlclose(libHandle);
 	return result;
 }
@@ -31,11 +35,27 @@
 - (id) fetchCapability: (NSString *) capability
 {
 	void *libHandle = dlopen(GRAPHICS_SERVICES_PATH, RTLD_LAZY);
+#if __has_feature(objc_arc)
+	id (*GSSystemCopyCapability)(NSString *);
+	GSSystemCopyCapability = dlsym(libHandle, "GSSystemCopyCapability");
+    id capabilityValue;
+    if (GSSystemCopyCapability)
+    {
+        capabilityValue = GSSystemCopyCapability(capability);
+    }
+    dlclose(libHandle);
+	return capabilityValue;
+#else
 	int (*GSSystemCopyCapability)(NSString *);
 	GSSystemCopyCapability = dlsym(libHandle, "GSSystemCopyCapability");
-	id capabilityValue = (id) GSSystemCopyCapability(capability);
+    id capabilityValue;
+    if (GSSystemCopyCapability)
+    {
+        capabilityValue = GSSystemCopyCapability(capability);
+    }
 	dlclose(libHandle);
 	return [capabilityValue autorelease];
+#endif
 }
 
 - (void) scanCapabilities
