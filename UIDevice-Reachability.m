@@ -16,7 +16,7 @@
 #import <dlfcn.h>
 
 #import "UIDevice-Reachability.h"
-#import "wwanconnect.h"
+#import "Apple/wwanconnect.h"
 
 @implementation UIDevice (Reachability)
 SCNetworkConnectionFlags connectionFlags;

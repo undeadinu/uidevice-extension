@@ -23,7 +23,7 @@ The project was originally started by Erica Sadun [github](https://github.com/er
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  # s.license      = 'TODO'
+  s.license      = 'Creative Commons Attribution 4.0'
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
@@ -54,7 +54,7 @@ The project was originally started by Erica Sadun [github](https://github.com/er
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.source_files  = '*.{h,m,c}'
+  s.source_files  = '*.{h,m}', 'Apple/*.{h,c}'
   s.exclude_files = 'Example'
 
   s.public_header_files = '*.h'
