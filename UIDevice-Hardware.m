@@ -204,6 +204,24 @@
     return [UIDevice platformStringForType:[self platformType]];
 }
 
++ (BOOL)is86PlatformPrefix:(NSString *)platform
+{
+    return [platform hasSuffix:@"86"] || [platform isEqual:@"x86_64"];
+}
+
++ (BOOL)isSmallerScreenForPlatform:(NSString *)platform
+{
+    BOOL smallerScreen = YES;
+    
+    // Simulator thanks Jordan Breeding
+    if ( [self is86PlatformPrefix:platform] )
+    {
+        smallerScreen = [ [UIScreen mainScreen] bounds].size.width < 768;
+    }
+    
+    return smallerScreen;
+}
+
 + (NSUInteger) platformTypeForString:(NSString *)platform
 {
     // The ever mysterious iFPGA
@@ -269,11 +287,16 @@
     if ([platform hasPrefix:@"iPad"])               return UIDeviceUnknowniPad;
     if ([platform hasPrefix:@"AppleTV"])            return UIDeviceUnknownAppleTV;
     
-    // Simulator thanks Jordan Breeding
-    if ([platform hasSuffix:@"86"] || [platform isEqual:@"x86_64"])
+    
+    if ( [self is86PlatformPrefix:platform] )
     {
-        BOOL smallerScreen = [[UIScreen mainScreen] bounds].size.width < 768;
-        return smallerScreen ? UIDeviceiPhoneSimulatoriPhone : UIDeviceiPhoneSimulatoriPad;
+        if ( [self isSmallerScreenForPlatform:platform] )
+        {
+            return UIDeviceiPhoneSimulatoriPhone;
+        } else
+        {
+            return UIDeviceiPhoneSimulatoriPad;
+        }
     }
 	
     return UIDeviceUnknown;
@@ -363,6 +386,16 @@
     if ([platform hasPrefix:@"iPod"]) return UIDeviceFamilyiPod;
     if ([platform hasPrefix:@"iPad"]) return UIDeviceFamilyiPad;
     if ([platform hasPrefix:@"AppleTV"]) return UIDeviceFamilyAppleTV;
+    if ( [UIDevice is86PlatformPrefix:platform] )
+    {
+        if ( [UIDevice isSmallerScreenForPlatform:platform] )
+        {
+            return UIDeviceFamilyiPhone;
+        } else
+        {
+            return UIDeviceFamilyiPad;
+        }
+    }
     
     return UIDeviceFamilyUnknown;
 }
