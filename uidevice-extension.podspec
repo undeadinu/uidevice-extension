@@ -55,7 +55,7 @@ The project was originally started by Erica Sadun [github](https://github.com/er
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.source_files  = '*.{h,m}', 'Apple/*.{h,c}'
-  s.exclude_files = 'Example'
+  s.exclude_files = 'Example', 'UIDevice-IOKitExtensions.{h,m}'
 
   s.public_header_files = '*.h'
 
