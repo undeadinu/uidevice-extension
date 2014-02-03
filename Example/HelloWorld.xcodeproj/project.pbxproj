@@ -17,6 +17,14 @@
 		3C02A5AF184C5749002B999D /* UIDevice-IOKitExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5A6184C5749002B999D /* UIDevice-IOKitExtensions.m */; };
 		3C02A5B0184C5749002B999D /* UIDevice-Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5A8184C5749002B999D /* UIDevice-Orientation.m */; };
 		3C02A5B1184C5749002B999D /* UIDevice-Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5AA184C5749002B999D /* UIDevice-Reachability.m */; };
+		3C1897CC189FE1500056F994 /* UIDevice-Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5A1184C5749002B999D /* UIDevice-Capabilities.m */; };
+		3C1897CD189FE1500056F994 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5A4184C5749002B999D /* UIDevice-Hardware.m */; };
+		3C1897CF189FE1500056F994 /* UIDevice-Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5A8184C5749002B999D /* UIDevice-Orientation.m */; };
+		3C1897D1189FE1E10056F994 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B2372101E2D3A005DB65B /* SystemConfiguration.framework */; };
+		3CFD2441189FE48500F0BB01 /* wwanconnect.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A59E184C5749002B999D /* wwanconnect.c */; };
+		3CFD2442189FE48500F0BB01 /* wwanconnect.h in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A59F184C5749002B999D /* wwanconnect.h */; };
+		3CFD2443189FE48D00F0BB01 /* UIDevice-Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5AA184C5749002B999D /* UIDevice-Reachability.m */; };
+		3CFD2444189FE49000F0BB01 /* UIDevice-IOKitExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C02A5A6184C5749002B999D /* UIDevice-IOKitExtensions.m */; };
 		8E3A1F090FAA199F009B0518 /* cover320x416.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3A1F080FAA199F009B0518 /* cover320x416.png */; };
 		8E4156E90FA4EE0E0006D27C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4156E70FA4EE0E0006D27C /* Default.png */; };
 		8E4156EA0FA4EE0E0006D27C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4156E80FA4EE0E0006D27C /* icon.png */; };
@@ -99,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C1897D1189FE1E10056F994 /* SystemConfiguration.framework in Frameworks */,
 				EF198C4616313A1300156550 /* UIKit.framework in Frameworks */,
 				EF198C6116313A5500156550 /* IOKit.framework in Frameworks */,
 				EF198C4716313A1300156550 /* Foundation.framework in Frameworks */,
@@ -326,9 +335,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFD2441189FE48500F0BB01 /* wwanconnect.c in Sources */,
+				3CFD2442189FE48500F0BB01 /* wwanconnect.h in Sources */,
+				3CFD2444189FE49000F0BB01 /* UIDevice-IOKitExtensions.m in Sources */,
 				EF198C5016313A1300156550 /* main.m in Sources */,
 				EF198C5416313A1300156550 /* AppDelegate.m in Sources */,
+				3C1897CF189FE1500056F994 /* UIDevice-Orientation.m in Sources */,
+				3CFD2443189FE48D00F0BB01 /* UIDevice-Reachability.m in Sources */,
+				3C1897CD189FE1500056F994 /* UIDevice-Hardware.m in Sources */,
 				EF198C6016313A3400156550 /* ViewController.m in Sources */,
+				3C1897CC189FE1500056F994 /* UIDevice-Capabilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +389,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,10 +463,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "GetDeviceSpecs/GetDeviceSpecs-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -473,12 +487,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "GetDeviceSpecs/GetDeviceSpecs-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
