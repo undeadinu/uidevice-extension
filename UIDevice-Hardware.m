@@ -62,6 +62,18 @@
  iPhone5,4 ->    iPhone 5C/GSM+CDMA, N49
  iPhone6,1 ->    iPhone 5S/GSM, N51
  iPhone6,2 ->    iPhone 5S/GSM+CDMA, N53
+ iPhone7,2 ->    iPhone 6, N61
+ iPhone7,1 ->    iPhone 6 Plus, N56
+ iPhone8,1 ->    iPhone 6S/Samsung, N71
+ iPhone8,1 ->    iPhone 6S/TSMC, N71m
+ iPhone8,2 ->    iPhone 6S Plus/Samsung, N66
+ iPhone8,2 ->    iPhone 6S Plus/TSMC, N66m
+ iPhone8,4 ->    iPhone SE/TSMC, N69
+ iPhone8,4 ->    iPhone SE/Samsung, N69u
+ iPhone9,1 ->    iPhone 7/?, D10
+ iPhone9,3 ->    iPhone 7/?, D101
+ iPhone9,2 ->    iPhone 7 Plus/?, D11
+ iPhone9,4 ->    iPhone 7 Plus/?, D111
 
  iPod1,1   ->    iPod touch 1, N45
  iPod2,1   ->    iPod touch 2, N72
@@ -226,7 +238,7 @@
 {
     // The ever mysterious iFPGA
     if ([platform isEqualToString:@"iFPGA"])        return UIDeviceIFPGA;
-	
+    
     // iPhone
     if ([platform isEqualToString:@"iPhone1,1"])    return UIDeviceiPhone1;
     if ([platform isEqualToString:@"iPhone1,2"])    return UIDeviceiPhone3G;
@@ -241,6 +253,15 @@
     if ([platform isEqualToString:@"iPhone5,4"])    return UIDeviceiPhone5CGSMCDMA;
     if ([platform isEqualToString:@"iPhone6,1"])    return UIDeviceiPhone5SGSM;
     if ([platform isEqualToString:@"iPhone6,2"])    return UIDeviceiPhone5SGSMCDMA;
+    if ([platform isEqualToString:@"iPhone7,2"])    return UIDeviceiPhone6;
+    if ([platform isEqualToString:@"iPhone7,1"])    return UIDeviceiPhone6Plus;
+    if ([platform isEqualToString:@"iPhone8,1"])    return UIDeviceiPhone6S;
+    if ([platform isEqualToString:@"iPhone8,2"])    return UIDeviceiPhone6SPlus;
+    if ([platform isEqualToString:@"iPhone8,4"])    return UIDeviceiPhoneSE;
+    if ([platform isEqualToString:@"iPhone9,1"])    return UIDeviceiPhone7;
+    if ([platform isEqualToString:@"iPhone9,3"])    return UIDeviceiPhone7;
+    if ([platform isEqualToString:@"iPhone9,2"])    return UIDeviceiPhone7Plus;
+    if ([platform isEqualToString:@"iPhone9,4"])    return UIDeviceiPhone7Plus;
     
     // iPod
     if ([platform hasPrefix:@"iPod1"])              return UIDeviceiPod1;
@@ -249,7 +270,7 @@
     if ([platform hasPrefix:@"iPod3"])              return UIDeviceiPod3;
     if ([platform hasPrefix:@"iPod4"])              return UIDeviceiPod4;
     if ([platform hasPrefix:@"iPod5"])              return UIDeviceiPod5;
-	
+    
     // iPad
     if ([platform hasPrefix:@"iPad1"])              return UIDeviceiPad1;
     if ([platform hasPrefix:@"iPad2"])
@@ -281,7 +302,7 @@
     // Apple TV
     if ([platform hasPrefix:@"AppleTV2"])           return UIDeviceAppleTV2;
     if ([platform hasPrefix:@"AppleTV3"])           return UIDeviceAppleTV3;
-	
+    
     if ([platform hasPrefix:@"iPhone"])             return UIDeviceUnknowniPhone;
     if ([platform hasPrefix:@"iPod"])               return UIDeviceUnknowniPod;
     if ([platform hasPrefix:@"iPad"])               return UIDeviceUnknowniPad;
@@ -298,13 +319,13 @@
             return UIDeviceiPhoneSimulatoriPad;
         }
     }
-	
+    
     return UIDeviceUnknown;
 }
 
 + (NSString *) platformStringForType:(NSUInteger)platformType
 {
-	switch (platformType)
+    switch (platformType)
     {
         case UIDeviceiPhone1:               return IPHONE_1_NAMESTRING;
         case UIDeviceiPhone3G:              return IPHONE_3G_NAMESTRING;
@@ -319,8 +340,15 @@
         case UIDeviceiPhone5CGSMCDMA:       return IPHONE_5C_NAMESTRING;
         case UIDeviceiPhone5SGSM:           return IPHONE_5S_NAMESTRING;
         case UIDeviceiPhone5SGSMCDMA:       return IPHONE_5S_NAMESTRING;
+        case UIDeviceiPhone6:               return IPHONE_6_NAMESTRING;
+        case UIDeviceiPhone6Plus:           return IPHONE_6_PLUS_NAMESTRING;
+        case UIDeviceiPhone6S:              return IPHONE_6S_NAMESTRING;
+        case UIDeviceiPhone6SPlus:          return IPHONE_6S_PLUS_NAMESTRING;
+        case UIDeviceiPhoneSE:              return IPHONE_SE_NAMESTRING;
+        case UIDeviceiPhone7:               return IPHONE_7_NAMESTRING;
+        case UIDeviceiPhone7Plus:           return IPHONE_7_PLUS_NAMESTRING;
         case UIDeviceUnknowniPhone:         return IPHONE_UNKNOWN_NAMESTRING;
-			
+            
         case UIDeviceiPod1:                 return IPOD_1_NAMESTRING;
         case UIDeviceiPod2:                 return IPOD_2_NAMESTRING;
         case UIDeviceiPod3:                 return IPOD_3_NAMESTRING;
@@ -355,8 +383,8 @@
 
 + (NSString *) platformStringForPlatform:(NSString *)platform
 {
-	NSUInteger platformType = [UIDevice platformTypeForString:platform];
-	return [UIDevice platformStringForType:platformType];
+    NSUInteger platformType = [UIDevice platformTypeForString:platform];
+    return [UIDevice platformStringForType:platformType];
 }
 
 + (BOOL) hasRetinaDisplay
