@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "uidevice-extension"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "Categories that expand on the information provided by UIDevice"
 
   s.description  = <<-DESC
